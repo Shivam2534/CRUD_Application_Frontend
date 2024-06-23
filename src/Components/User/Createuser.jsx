@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import {Host_URL} from '../../../constant.js'
 
 function Createuser() {
   const [id, setid] = useState();
@@ -27,7 +28,7 @@ function Createuser() {
       formData.append("avatar", avatar);
 
       const userResponse = await axios
-        .post(`http://localhost:8000/api/users/createuser`, formData)
+        .post(`${Host_URL}/api/users/createuser`, formData)
         .then((res) => res.data);
 
       console.log(userResponse);

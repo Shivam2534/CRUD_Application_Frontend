@@ -1,13 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { Host_URL } from "../../../constant.js";
 
 function AllTeams() {
   const [teams, setteams] = useState([]);
   useEffect(() => {
     const FindAllTeams = async () => {
       const Allteams = await axios
-        .get(`http://localhost:8000/api/teams/AllTeams`)
+        .get(`${Host_URL}/api/teams/AllTeams`)
         .then((res) => res.data.data);
 
       console.log(Allteams);

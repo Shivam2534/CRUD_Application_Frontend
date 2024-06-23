@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import {Host_URL} from '../../../constant.js'
 
 function IndividualTeam() {
   const { teamId } = useParams();
@@ -11,7 +12,7 @@ function IndividualTeam() {
     const fetchTeamData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/teams/SingleTeam/${teamId}`
+          `${Host_URL}/api/teams/SingleTeam/${teamId}`
         );
         setTeam(response.data.data);
         console.log(response.data.data)

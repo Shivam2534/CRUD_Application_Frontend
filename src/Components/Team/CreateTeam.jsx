@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import {Host_URL} from '../../../constant.js'
 
 function CreateTeam() {
   const [Team_name, setTeam_name] = useState("");
@@ -10,7 +11,7 @@ function CreateTeam() {
   const CreateNewTeam = async () => {
     try {
       const TeamData = await axios
-        .post("http://localhost:8000/api/teams/team", { Team_name, Team_Id })
+        .post(`${Host_URL}/api/teams/team`, { Team_name, Team_Id })
         .then((res) => res.data.message);
 
       setmsg(TeamData);
@@ -77,7 +78,10 @@ function CreateTeam() {
         >
           Create Team
         </button>
-        <NavLink to={'/'} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        <NavLink
+          to={"/"}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        >
           Back
         </NavLink>
       </div>

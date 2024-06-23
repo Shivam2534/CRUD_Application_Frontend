@@ -7,6 +7,7 @@ import { FcFilledFilter } from "react-icons/fc";
 import axios from "axios";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
+import { Host_URL } from "../../../constant.js";
 
 function Cards() {
   const [cards, setCards] = useState([]);
@@ -37,18 +38,15 @@ function Cards() {
   useEffect(() => {
     const generateCards = async () => {
       try {
-        const cardsData = await Axios.get(
-          `http://localhost:8000/api/users/getallusers`,
-          {
-            params: {
-              page: currentPage,
-              first_name: Seachthis,
-              domain: domainfilter,
-              gender: genderfilter,
-              available: isChecked,
-            },
-          }
-        ).then((res) => res.data.data);
+        const cardsData = await Axios.get(`${Host_URL}/api/users/getallusers`, {
+          params: {
+            page: currentPage,
+            first_name: Seachthis,
+            domain: domainfilter,
+            gender: genderfilter,
+            available: isChecked,
+          },
+        }).then((res) => res.data.data);
         console.log(cardsData);
         setCards(cardsData);
       } catch (error) {
@@ -112,13 +110,10 @@ function Cards() {
   const AddMemberToTeam = async () => {
     try {
       const TeamData = await axios
-        .post(
-          `http://localhost:8000/api/teams/addmember/${TeamSectionToggle}`,
-          {
-            Team_name,
-            Team_Id,
-          }
-        )
+        .post(`${Host_URL}/api/teams/addmember/${TeamSectionToggle}`, {
+          Team_name,
+          Team_Id,
+        })
         .then((res) => res.data);
 
       setmsg(TeamData.message);
@@ -138,7 +133,7 @@ function Cards() {
     console.log(_id);
     try {
       const DeleteMsg = await axios
-        .delete(`http://localhost:8000/api/users/deleteuser/${_id}`)
+        .delete(`${Host_URL}/api/users/deleteuser/${_id}`)
         .then((res) => res.data);
       console.log("User Data after Deletion:", DeleteMsg);
       setDeletemsg(DeleteMsg.message);
@@ -158,7 +153,7 @@ function Cards() {
 
     try {
       const userResponse = await axios
-        .put(`http://localhost:8000/api/users/updateuser/${userId}`, {
+        .put(`${Host_URL}/api/users/updateuser/${userId}`, {
           id,
           first_name,
           last_name,
